@@ -33,6 +33,12 @@ class ICDARDataset(Dataset):
     def __getitem__(self, i):
         # Read image
         image = Image.open(self.images[i], mode='r')
+        
+        #print(i, image.size)
+        #wpercent = (basewidth/float(image.size[0]))
+        #hsize = int((float(image.size[1])*float(wpercent)))
+        #image = image.resize((basewidth,hsize), Image.ANTIALIAS)
+        
         image = image.convert('RGB')
 
         # Read objects in this image (bounding boxes, labels, difficulties)
