@@ -10,7 +10,7 @@ import cv2
 import os
 import shutil
 
-image_path = "../ICDAR_Dataset/0325updated.task1train(626p)/0325updated.task1train(626p)(ori)/"
+image_path = "../ICDAR_Dataset/0325updated.task1train(626p)/0325updated.task1train(626p)/"
 box_path = image_path + 'box/'
 
 # gain the image list
@@ -77,11 +77,19 @@ def draw():
         line = f.readline()
         # img = cv2.imshow('image', img)
         # cv2.waitKey(0)
+        
+def remove_duplicates():
+    import os
+    data_dir = '../ICDAR_Dataset/0325updated.task1train(626p)/0325updated.task1train(626p)/'
+    for name in os.listdir(data_dir):
+      if '(' in name:
+        os.remove(data_dir + name)
 
-if __name__ == '__main__':
+if __name__ == '__main__':    
     if os.path.exists(box_path):
         shutil.rmtree(box_path)
     os.mkdir(box_path)
+    remove_duplicates() # remove duplicate entries from the dataset
     list()  # list all the image in image_path into a txt
     draw()  # draw the box based on the list
 
