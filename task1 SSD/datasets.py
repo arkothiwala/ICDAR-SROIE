@@ -34,10 +34,13 @@ class ICDARDataset(Dataset):
         # Read image
         image = Image.open(self.images[i], mode='r')
         
+        if image.size[0] > 1000:
+          basewidth = 500
+          wpercent = (basewidth/float(image.size[0]))
+          hsize = int((float(image.size[1])*float(wpercent)))
+          image = image.resize((basewidth,hsize), Image.ANTIALIAS)
+        
         #print(i, image.size)
-        #wpercent = (basewidth/float(image.size[0]))
-        #hsize = int((float(image.size[1])*float(wpercent)))
-        #image = image.resize((basewidth,hsize), Image.ANTIALIAS)
         
         image = image.convert('RGB')
 
