@@ -22,7 +22,11 @@ checkpoint = 'best4.17.tar' #''BEST_checkpoint_ssd300.pth.tar'
 test_img_num = 25
 
 # Load model checkpoint that is to be evaluated
-checkpoint = torch.load(checkpoint)
+# checkpoint = torch.load(checkpoint)
+if torch.cuda.is_available() == True:
+    checkpoint = torch.load(checkpoint, map_location=torch.device('cuda'))
+else:
+    checkpoint = torch.load(checkpoint, map_location=torch.device('cpu'))
 model = checkpoint['model']
 model = model.to(device)
 
